@@ -6,7 +6,10 @@ import com.enchantedguys.wizardingworldmod.common.items.BottleOfBlood;
 import com.enchantedguys.wizardingworldmod.common.items.KnifeItem;
 import com.enchantedguys.wizardingworldmod.common.items.WaterGlass;
 import com.enchantedguys.wizardingworldmod.common.items.charmbooks.KillingCurseCharmBook;
-import com.enchantedguys.wizardingworldmod.common.items.foods.*;
+import com.enchantedguys.wizardingworldmod.common.items.foods.BeansItem;
+import com.enchantedguys.wizardingworldmod.common.items.foods.BertieBottsBeans;
+import com.enchantedguys.wizardingworldmod.common.items.foods.FoodList;
+import com.enchantedguys.wizardingworldmod.common.items.foods.PumpkinJuice;
 import com.enchantedguys.wizardingworldmod.common.items.wands.MrLimnerWand;
 import com.enchantedguys.wizardingworldmod.common.items.wands.REDX000Wand;
 import com.enchantedguys.wizardingworldmod.common.util.enums.ModBannerPattern;
@@ -21,7 +24,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Supplier;
 
 public class ModItems {
@@ -68,8 +70,8 @@ public class ModItems {
     public static final RegistryObject<Item> RED_X_000_WAND = registerItem("red_x_000_wand", REDX000Wand::new);
 
     // Block Items -> Registering in the main class
-    public static final RegistryObject<Item> WIZARDING_BENCH_ITEM = registerBlockItem(ModBlocks.WIZARDING_BENCH.get(), new Item.Properties().group(WizardingWorldMod.CHARMS));
-    public static final RegistryObject<Item> OBSIDIAN_BRICKS_ITEM = registerBlockItem(ModBlocks.OBSIDIAN_BRICKS.get(), new Item.Properties().group(WizardingWorldMod.BUILDINGBLOCKS));
+    public static final RegistryObject<Item> WIZARDING_BENCH_ITEM = registerBlockItem("wizarding_bench", ModBlocks.WIZARDING_BENCH, new Item.Properties().group(WizardingWorldMod.CHARMS));
+    public static final RegistryObject<Item> OBSIDIAN_BRICKS_ITEM = registerBlockItem("obsidian_bricks", ModBlocks.OBSIDIAN_BRICKS, new Item.Properties().group(WizardingWorldMod.BUILDINGBLOCKS));
 
     public static final RegistryObject<BertieBottsBeans> BERTIE_BOTTS_BEANS = ITEMS.register("bertie_botts_beans", BertieBottsBeans::new);
 
@@ -88,8 +90,8 @@ public class ModItems {
                 pattern.isBool()), new Item.Properties().rarity(Rarity.RARE).group(WizardingWorldMod.OTHER)));
     }
 
-    private static RegistryObject<Item> registerBlockItem(Block block, Item.Properties properties) {
-        return registerItem(Objects.requireNonNull(block.getRegistryName()).getPath(), () -> new BlockItem(block, properties));
+    private static RegistryObject<Item> registerBlockItem(String name, RegistryObject<Block> ro, Item.Properties properties) {
+        return ITEMS.register(name, () -> new BlockItem(ro.get(), properties));
     }
 
     private static ImmutableList<ResourceLocation> createBlacklist(RegistryObject<Item>... objects) {

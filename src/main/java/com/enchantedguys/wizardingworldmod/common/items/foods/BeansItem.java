@@ -212,18 +212,11 @@ public class BeansItem extends BaseFoodItem {
         @Override
         public int getColor(ItemStack stack, int tintIndex) {
             {
-                switch (tintIndex) {
-                    case 0:
-                        return Color.WHITE.getRGB();
-                    case 1: {
-                        BeansColor beansColor = BeansItem.getColor(stack);
-                        return beansColor.getColor().getRGB();
-                    }
-                    default: {
-                        // oops! should never get here.
-                        return Color.BLACK.getRGB();
-                    }
+                if (tintIndex == 0) {
+                    BeansColor beansColor = BeansItem.getColor(stack);
+                    return beansColor.getColor().getRGB();
                 }
+                return Color.BLACK.getRGB();
             }
         }
     }
