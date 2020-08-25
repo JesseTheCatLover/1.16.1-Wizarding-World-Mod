@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xx ",
+    "xx ",
+    "   "
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result":
+  {
+    "item": "wwm:obsidian_bricks",
+    "count": 4
+  }
+}

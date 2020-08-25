@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "wwm:obsidian_bricks"
+    },
+    {
+      "item": "minecraft:yellow_dye"
+    }
+  ],
+  "result":
+  {
+    "item": "wwm:yellow_obsidian_bricks",
+    "count": 1
+  }
+}

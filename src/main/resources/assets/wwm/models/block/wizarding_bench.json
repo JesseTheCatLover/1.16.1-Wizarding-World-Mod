@@ -1,0 +1,11 @@
+{
+  "parent": "block/oak_planks",
+  "textures": {
+    "up": "wwm:blocks/wizarding_bench_top",
+    "down": "minecraft:block/dark_oak_planks",
+    "south": "wwm:blocks/wizarding_bench_side",
+    "north": "wwm:blocks/wizarding_bench_side",
+    "west": "wwm:blocks/wizarding_bench_side",
+    "east": "wwm:blocks/wizarding_bench_side"
+  }
+}

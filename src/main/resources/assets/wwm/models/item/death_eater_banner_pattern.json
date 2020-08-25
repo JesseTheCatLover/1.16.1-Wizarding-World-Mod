@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "wwm:items/death_eater_banner_pattern"
+  }
+}

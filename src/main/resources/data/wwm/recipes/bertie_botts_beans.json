@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    " p ",
+    "pfp",
+    "psp"
+  ],
+  "key":
+  {
+    "p":
+    {
+      "item": "minecraft:paper"
+    },
+    "f":
+    {
+      "item": "minecraft:pufferfish"
+    },
+    "s":
+    {
+      "item": "minecraft:sugar"
+    }
+  },
+  "result":
+  {
+    "item": "wwm:bertie_botts_beans",
+    "count": 1
+  }
+}

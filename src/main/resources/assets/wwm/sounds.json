@@ -1,0 +1,11 @@
+{
+"music_disc.harry_potter_theme": {
+		"subtitle": "harry_potter_theme",
+		"sounds": [
+			{
+				"name": "wwm:music_disc/harry_potter_theme_by_john_williams",
+				"stream": true
+			}
+		]
+	}
+}
