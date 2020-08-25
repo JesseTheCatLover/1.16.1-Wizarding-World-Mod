@@ -17,6 +17,10 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
+
+/**
+*  This Item is used to summon the voldemort
+ */
 public class BottleOfBlood extends Item {
     public BottleOfBlood() {
         super(new Item.Properties()
