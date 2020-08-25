@@ -10,12 +10,6 @@ public class FoodList {
      * You can change the food if you want
      */
 
-    public static final Food BUTTER_BEAR = build(8, 14);
-    public static final Food CHOCOLATE_FROG = build(4, 10);
-    public static final Food CHOCOLATE_FROG_CARD = build(6, 12);
-    public static final Food HAGRIDS_ROCK_CAKE = build(3, 0.4F);
-    public static final Food PUMPKING_JUICE = build(6, 5);
-    public static final Food YOGURT = build(2, 1.2F);
     public static final Food BLACK_BEAN = build(1, 1.0F, new FoodEffect(new EffectInstance(Effects.WITHER, 25 * 5, 1), 1));
     public static final Food BLUE_BEAN = build(1, 1.0F, new FoodEffect(new EffectInstance(Effects.SPEED, 25 * 7, 1), 1));
     public static final Food BROWN_BEAN = build(1, 1.0F, new FoodEffect(new EffectInstance(Effects.WEAKNESS, 25 * 5, 1), 1));

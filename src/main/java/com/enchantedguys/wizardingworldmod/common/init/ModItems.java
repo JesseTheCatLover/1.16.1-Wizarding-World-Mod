@@ -1,15 +1,9 @@
 package com.enchantedguys.wizardingworldmod.common.init;
 
 import com.enchantedguys.wizardingworldmod.common.WizardingWorldMod;
-import com.enchantedguys.wizardingworldmod.common.items.BeerGlass;
-import com.enchantedguys.wizardingworldmod.common.items.BottleOfBlood;
-import com.enchantedguys.wizardingworldmod.common.items.KnifeItem;
-import com.enchantedguys.wizardingworldmod.common.items.WaterGlass;
+import com.enchantedguys.wizardingworldmod.common.items.*;
 import com.enchantedguys.wizardingworldmod.common.items.charmbooks.KillingCurseCharmBook;
-import com.enchantedguys.wizardingworldmod.common.items.foods.BeansItem;
-import com.enchantedguys.wizardingworldmod.common.items.foods.BertieBottsBeans;
-import com.enchantedguys.wizardingworldmod.common.items.foods.FoodList;
-import com.enchantedguys.wizardingworldmod.common.items.foods.PumpkinJuice;
+import com.enchantedguys.wizardingworldmod.common.items.foods.*;
 import com.enchantedguys.wizardingworldmod.common.items.wands.MrLimnerWand;
 import com.enchantedguys.wizardingworldmod.common.items.wands.REDX000Wand;
 import com.enchantedguys.wizardingworldmod.common.util.enums.ModBannerPattern;
@@ -36,19 +30,19 @@ public class ModItems {
     public static final RegistryObject<Item> BOTTLE_OF_BLOOD = registerItem("bottle_of_blood", BottleOfBlood::new);
     public static final RegistryObject<Item> BEER_GLASS = registerItem("beer_glass", BeerGlass::new);
     public static final RegistryObject<Item> WATER_GLASS = registerItem("water_glass", WaterGlass::new);
+    public static final RegistryObject<Item> CHOCOLATE_FROG_CARD = registerItem("chocolate_frog_card", ChocolateFrogCard::new);
+    public static final RegistryObject<Item> BUTTER = registerItem("butter", () -> new Item(new Item.Properties().group(WizardingWorldMod.MATERIALS).maxStackSize(16)));
 
     // Tools
     public static final RegistryObject<Item> IRON_KNIFE = registerItem("iron_knife", () -> new KnifeItem(ItemTier.IRON, 1, 1.2f, new Item.Properties().group(WizardingWorldMod.OTHER)));
     public static final RegistryObject<Item> GOLDEN_KNIFE = ITEMS.register("golden_knife", () -> new KnifeItem(ItemTier.GOLD, 1, 1.2f, new Item.Properties().group(WizardingWorldMod.OTHER)));
 
     // Foods
-    public static final RegistryObject<Item> HAGRIDS_ROCK_CAKE = registerDefaultFood("hagrids_rock_cake", FoodList.HAGRIDS_ROCK_CAKE, 64);
+    public static final RegistryObject<Item> HAGRIDS_ROCK_CAKE = registerItem("hagrids_rock_cake", HagridsRockCake::new);
     public static final RegistryObject<Item> PUMPKIN_JUICE = registerItem("pumpkin_juice", PumpkinJuice::new);
-    public static final RegistryObject<Item> YOGURT = registerDefaultFood("yogurt", FoodList.YOGURT, 1);
-    public static final RegistryObject<Item> BUTTER = registerItem("butter", () -> new Item(new Item.Properties().group(WizardingWorldMod.MATERIALS)));
-    public static final RegistryObject<Item> BUTTER_BEER = registerDefaultFood("butter_beer", FoodList.BUTTER_BEAR, 1);
-    public static final RegistryObject<Item> CHOCOLATE_FROG = registerDefaultFood("chocolate_frog", FoodList.CHOCOLATE_FROG, 1);
-    public static final RegistryObject<Item> CHOCOLATE_FROG_CARD = registerDefaultFood("chocolate_frog_card", FoodList.CHOCOLATE_FROG_CARD, 1);
+    public static final RegistryObject<Item> YOGURT = registerItem("yogurt", Yogurt::new);
+    public static final RegistryObject<Item> BUTTER_BEER = registerItem("butter_beer", ButterBeer::new);
+    public static final RegistryObject<Item> CHOCOLATE_FROG = registerItem("chocolate_frog", ChocolateFrog::new);
     public static final RegistryObject<Item> BEANS = registerItem("beans", BeansItem::new);
 
     // Banner Patterns
