@@ -35,7 +35,10 @@ public class ModEntries {
           boolean leftItemIsInTag = ItemTags.getCollection().get(WandsTag).contains(playerIn.getHeldItemOffhand().getItem());
 
           if(rightItemIsInTag || leftItemIsInTag) {
+
+              // For test...
               playerIn.addPotionEffect(new EffectInstance(Effects.WITHER, 100, 300));
+
           } else {
               playerIn.sendMessage(new StringTextComponent(OnPlayerWithoutWand), playerIn.getUniqueID());
           }
