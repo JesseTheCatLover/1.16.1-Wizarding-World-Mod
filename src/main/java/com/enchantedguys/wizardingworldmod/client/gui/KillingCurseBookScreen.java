@@ -1,24 +1,13 @@
 package com.enchantedguys.wizardingworldmod.client.gui;
 
-import com.enchantedguys.wizardingworldmod.WizardingWorldMod;
+import com.enchantedguys.wizardingworldmod.common.WizardingWorldMod;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.DialogTexts;
-import net.minecraft.client.gui.screen.IScreen;
-import net.minecraft.client.gui.screen.ReadBookScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.GuiContainerEvent;
-
-import javax.swing.plaf.ButtonUI;
-import java.awt.*;
 
 public class KillingCurseBookScreen extends Screen {
 
