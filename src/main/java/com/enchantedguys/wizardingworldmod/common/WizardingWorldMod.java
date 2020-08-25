@@ -52,6 +52,7 @@ public class WizardingWorldMod {
         // do something that can only be done on the client
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
+    //examplemod%%C:/Users/tobia/OneDrive/Desktop/Developing/Minecraft/Modding/Projects/1.16.1-Wizarding-World-Mod\build\resources\main;examplemod%%C:/Users/tobia/OneDrive/Desktop/Developing/Minecraft/Modding/Projects//1.16.1-Wizarding-World-Mod\build\classes\java\main
 
     @SubscribeEvent
     public void onBlockItemRegistry(RegistryEvent.Register<Item> event) {
