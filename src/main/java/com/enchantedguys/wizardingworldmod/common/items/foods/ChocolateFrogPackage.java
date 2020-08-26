@@ -10,8 +10,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
-public class ChocolateFrog extends Item {
-    public ChocolateFrog() {
+public class ChocolateFrogPackage extends Item {
+    public ChocolateFrogPackage() {
         super(new Item.Properties()
                 .group(WizardingWorldMod.FOODS)
                 .maxStackSize(1)
@@ -28,9 +28,9 @@ public class ChocolateFrog extends Item {
                 0.7F, 2.5F / (random.nextFloat() * 0.5F + 1.0F) + 0.2F);
 
         if (playerIn.getHeldItemMainhand().isEmpty()) {
-            playerIn.setHeldItem(Hand.MAIN_HAND, new ItemStack(ModItems.CHOCOLATE_FROG_CARD.get()));
-        } else if (!playerIn.inventory.addItemStackToInventory(new ItemStack(ModItems.CHOCOLATE_FROG_CARD.get()))) {
-            playerIn.dropItem(new ItemStack(ModItems.CHOCOLATE_FROG_CARD.get()), false);
+            playerIn.setHeldItem(Hand.MAIN_HAND, new ItemStack(ModItems.CHOCOLATE_FROG_DUMBLEDORE_CARD.get()));
+        } else if (!playerIn.inventory.addItemStackToInventory(new ItemStack(ModItems.CHOCOLATE_FROG_DUMBLEDORE_CARD.get()))) {
+            playerIn.dropItem(new ItemStack(ModItems.CHOCOLATE_FROG_DUMBLEDORE_CARD.get()), false);
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }

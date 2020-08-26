@@ -42,8 +42,8 @@ public class ModItems {
     public static final RegistryObject<Item> PUMPKIN_JUICE = registerItem("pumpkin_juice", PumpkinJuice::new);
     public static final RegistryObject<Item> YOGURT = registerItem("yogurt", Yogurt::new);
     public static final RegistryObject<Item> BUTTER_BEER = registerItem("butter_beer", ButterBeer::new);
-    public static final RegistryObject<Item> CHOCOLATE_FROG = registerItem("chocolate_frog", ChocolateFrog::new);
-    public static final RegistryObject<Item> CHOCOLATE_FROG_CARD = registerItem("chocolate_frog_dumbledoor_card", ChocolateFrogDumbledoreCard::new);
+    public static final RegistryObject<Item> CHOCOLATE_FROG_PACKAGE = registerItem("chocolate_frog_package", ChocolateFrogPackage::new);
+    public static final RegistryObject<Item> CHOCOLATE_FROG_DUMBLEDORE_CARD = registerItem("chocolate_frog_dumbledore_card", ChocolateFrogDumbledoreCard::new);
     public static final RegistryObject<Item> BEANS = registerItem("beans", BeansItem::new);
 
     // Banner Patterns
