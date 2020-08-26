@@ -30,7 +30,7 @@ public class ModItems {
     public static final RegistryObject<Item> BOTTLE_OF_BLOOD = registerItem("bottle_of_blood", BottleOfBlood::new);
     public static final RegistryObject<Item> BEER_GLASS = registerItem("beer_glass", BeerGlass::new);
     public static final RegistryObject<Item> WATER_GLASS = registerItem("water_glass", WaterGlass::new);
-    public static final RegistryObject<Item> CHOCOLATE_FROG_CARD = registerItem("chocolate_frog_card", ChocolateFrogCard::new);
+
     public static final RegistryObject<Item> BUTTER = registerItem("butter", () -> new Item(new Item.Properties().group(WizardingWorldMod.MATERIALS).maxStackSize(16)));
 
     // Tools
@@ -43,6 +43,7 @@ public class ModItems {
     public static final RegistryObject<Item> YOGURT = registerItem("yogurt", Yogurt::new);
     public static final RegistryObject<Item> BUTTER_BEER = registerItem("butter_beer", ButterBeer::new);
     public static final RegistryObject<Item> CHOCOLATE_FROG = registerItem("chocolate_frog", ChocolateFrog::new);
+    public static final RegistryObject<Item> CHOCOLATE_FROG_CARD = registerItem("chocolate_frog_card", ChocolateFrogCard::new);
     public static final RegistryObject<Item> BEANS = registerItem("beans", BeansItem::new);
 
     // Banner Patterns

@@ -153,8 +153,8 @@ public class BeansItem extends BaseFoodItem {
 
     public enum BeansColor implements IStringSerializable {
 
-        BLACK(0, "black", Color.BLACK),
-        BLUE(1, "blue", Color.BLUE),
+        BLACK(0, "black", new Color(84, 76, 76)),
+        BLUE(1, "blue", new Color(0, 76, 153)),
         BROWN(2, "brown", new Color(139, 69, 19)),
         CYAN(3, "cyan", Color.CYAN),
         GREEN(4, "green", Color.GREEN),
