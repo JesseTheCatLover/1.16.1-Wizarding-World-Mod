@@ -8,9 +8,7 @@
       "item": "minecraft:pink_dye"
     }
   ],
-  "result":
-  {
-    "item": "wwm:pink_obsidian_bricks",
-    "count": 1
+  "result": {
+    "item": "wwm:pink_obsidian_bricks"
   }
 }

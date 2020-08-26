@@ -66,10 +66,66 @@ public class ModItems {
     // Block Items -> Registering in the main class
     public static final RegistryObject<Item> WIZARDING_BENCH_ITEM = registerBlockItem("wizarding_bench", ModBlocks.WIZARDING_BENCH, new Item.Properties().group(WizardingWorldMod.CHARMS));
     public static final RegistryObject<Item> OBSIDIAN_BRICKS_ITEM = registerBlockItem("obsidian_bricks", ModBlocks.OBSIDIAN_BRICKS, new Item.Properties().group(WizardingWorldMod.BUILDINGBLOCKS));
+    public static final RegistryObject<Item> BLACK_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("black");
+    public static final RegistryObject<Item> BLUE_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("blue");
+    public static final RegistryObject<Item> BROWN_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("brown");
+    public static final RegistryObject<Item> CYAN_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("cyan");
+    public static final RegistryObject<Item> GRAY_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("gray");
+    public static final RegistryObject<Item> GREEN_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("green");
+    public static final RegistryObject<Item> LIGHT_BLUE_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("light_blue");
+    public static final RegistryObject<Item> LIGHT_GRAY_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("light_gray");
+    public static final RegistryObject<Item> LIME_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("lime");
+    public static final RegistryObject<Item> MAGENTA_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("magenta");
+    public static final RegistryObject<Item> ORANGE_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("orange");
+    public static final RegistryObject<Item> PINK_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("pink");
+    public static final RegistryObject<Item> RED_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("red");
+    public static final RegistryObject<Item> WHITE_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("white");
+    public static final RegistryObject<Item> YELLOW_OBSIDIAN_BRICKS_ITEM = registerColoredObsidianBlock("yellow");
 
     public static final RegistryObject<BertieBottsBeans> BERTIE_BOTTS_BEANS = ITEMS.register("bertie_botts_beans", BertieBottsBeans::new);
 
     public static final Supplier<ImmutableList<ResourceLocation>> BLACKLIST = () -> createBlacklist(WIZARDING_BENCH_ITEM, OBSIDIAN_BRICKS_ITEM);
+
+    private static RegistryObject<Item> registerColoredObsidianBlock(String color) {
+        Item.Properties properties = new Item.Properties().group(WizardingWorldMod.BUILDINGBLOCKS);
+        Supplier<Block> supplier = null;
+        switch (color) {
+            case "black":
+                supplier = ModBlocks.BLACK_OBSIDIAN_BRICKS;
+            case "blue":
+                supplier = ModBlocks.BLUE_OBSIDIAN_BRICKS;
+            case "brown":
+                supplier = ModBlocks.BROWN_OBSIDIAN_BRICKS;
+            case "cyan":
+                supplier = ModBlocks.CYAN_OBSIDIAN_BRICKS;
+            case "gray":
+                supplier = ModBlocks.GRAY_OBSIDIAN_BRICKS;
+            case "green":
+                supplier = ModBlocks.GREEN_OBSIDIAN_BRICKS;
+            case "light_blue":
+                supplier = ModBlocks.LIGHT_BLUE_OBSIDIAN_BRICKS;
+            case "light_gray":
+                supplier = ModBlocks.LIGHT_GRAY_OBSIDIAN_BRICKS;
+            case "lime":
+                supplier = ModBlocks.LIME_OBSIDIAN_BRICKS;
+            case "magenta":
+                supplier = ModBlocks.MAGENTA_OBSIDIAN_BRICKS;
+            case "orange":
+                supplier = ModBlocks.ORANGE_OBSIDIAN_BRICKS;
+            case "pink":
+                supplier = ModBlocks.PINK_OBSIDIAN_BRICKS;
+            case "red":
+                supplier = ModBlocks.RED_OBSIDIAN_BRICKS;
+            case "white":
+                supplier = ModBlocks.WHITE_OBSIDIAN_BRICKS;
+            case "yellow":
+                supplier = ModBlocks.YELLOW_OBSIDIAN_BRICKS;
+        }
+        if(supplier == null)
+            throw new NullPointerException("Colored obsidian block not found: " + color);
+        Supplier<Block> finalSupplier = supplier;
+        return ITEMS.register(color + "_obsidian_bricks", () -> new BlockItem(finalSupplier.get(), properties));
+    }
 
     private static RegistryObject<Item> registerDefaultFood(String name, Food food, int amount) {
         return ITEMS.register(name, () -> new Item(new Item.Properties().group(WizardingWorldMod.FOODS).maxStackSize(amount).food(food)));

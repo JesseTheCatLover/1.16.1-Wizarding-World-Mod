@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class REDX000Wand extends ShootableItem implements IVanishable {
+public class REDX000Wand extends ShootableItem implements IVanishable, IWandItem {
     public REDX000Wand() {
         super(new Properties()
                 .group(WizardingWorldMod.WANDS)
@@ -200,5 +200,10 @@ public class REDX000Wand extends ShootableItem implements IVanishable {
 
     public int func_230305_d_() {
         return 15;
+    }
+
+    @Override
+    public Item getWandItem() {
+        return this;
     }
 }

@@ -2,11 +2,17 @@
   "type": "minecraft:block",
   "pools": [
     {
+      "name": "selfdrop",
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
           "name": "wwm:yellow_obsidian_bricks"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
         }
       ]
     }

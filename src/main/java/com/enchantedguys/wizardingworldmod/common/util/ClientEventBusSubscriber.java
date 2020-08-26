@@ -7,15 +7,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = WizardingWorldMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusSubscriber {
-
-    @SubscribeEvent
-    public static void clientSetup(FMLClientSetupEvent event) {
-        //ItemModelsProperties.func_239418_a_(ModItems.BEANS.get(), new ResourceLocation("color"), BeansItem::getPropertyOverrite);
-    }
 
     @SubscribeEvent
     public static void colorRegister(ColorHandlerEvent.Item event) {

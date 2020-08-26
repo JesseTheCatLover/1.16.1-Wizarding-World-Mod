@@ -1,13 +1,14 @@
 package com.enchantedguys.wizardingworldmod.common;
 
+import com.enchantedguys.wizardingworldmod.client.screens.charmbook.CharmBookScreenManager;
 import com.enchantedguys.wizardingworldmod.common.init.ModBlocks;
 import com.enchantedguys.wizardingworldmod.common.init.ModItems;
 import com.enchantedguys.wizardingworldmod.common.init.ModSounds;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,12 +24,13 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(WizardingWorldMod.MOD_ID)
 public class WizardingWorldMod {
-    // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+
+    public static final Logger LOGGER = LogManager.getLogger();
     public static final String MOD_ID = "wwm";
+
+    private static CharmBookScreenManager charmBookScreenManager;
 
     public WizardingWorldMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -38,21 +40,19 @@ public class WizardingWorldMod {
         ModSounds.SOUNDS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
-        // Register ourselves for server and other game events we are interested in
+
+        charmBookScreenManager = new CharmBookScreenManager();
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+        SetupEvents.commonSetup(event);
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-        // do something that can only be done on the client
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+        SetupEvents.clientSetup(event);
     }
-    //examplemod%%C:/Users/tobia/OneDrive/Desktop/Developing/Minecraft/Modding/Projects/1.16.1-Wizarding-World-Mod\build\resources\main;examplemod%%C:/Users/tobia/OneDrive/Desktop/Developing/Minecraft/Modding/Projects//1.16.1-Wizarding-World-Mod\build\classes\java\main
 
     @SubscribeEvent
     public void onBlockItemRegistry(RegistryEvent.Register<Item> event) {
@@ -63,6 +63,18 @@ public class WizardingWorldMod {
             item.setRegistryName(Objects.requireNonNull(block.getRegistryName()));
             registry.register(item);
         });
+    }
+
+    public static CharmBookScreenManager getCharmBookScreenManager() {
+        return charmBookScreenManager;
+    }
+
+    public static ResourceLocation rl(String path) {
+        return new ResourceLocation(MOD_ID, path);
+    }
+
+    public static ResourceLocation rlTexture(String path) {
+        return rl("textures/" + path);
     }
 
     // Tabs

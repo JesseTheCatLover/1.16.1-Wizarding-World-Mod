@@ -1,22 +1,21 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "wcw",
-        " m "
-    ],
-    "key": {
-        "w": {
-            "item": "minecraft:wheat"
-        },
-        "c": {
-            "item": "minecraft:cocoa_beans"
-        },
-        "m": {
-            "item": "minecraft:milk_bucket"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "wcw",
+    " m "
+  ],
+  "key": {
+    "w": {
+      "item": "minecraft:wheat"
     },
-  "result":
-  {
+    "c": {
+      "item": "minecraft:cocoa_beans"
+    },
+    "m": {
+      "item": "minecraft:milk_bucket"
+    }
+  },
+  "result": {
     "item": "wwm:hagrids_rock_cake",
     "count": 12
   }

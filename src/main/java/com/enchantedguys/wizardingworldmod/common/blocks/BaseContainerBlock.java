@@ -35,8 +35,14 @@ public abstract class BaseContainerBlock<T extends ContainerTile> extends Block 
         return this.create();
     }
 
+    /**
+     * @return the tile entity instance
+     */
     public abstract TileEntity create();
 
+    /**
+     * @return the tile entity class for check stuff in onBlockActivated and onReplaced
+     */
     public abstract Class<T> tileEntityClass();
 
     @Override

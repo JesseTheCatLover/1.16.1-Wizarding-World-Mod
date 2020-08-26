@@ -1,37 +1,28 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern":
-  [
+  "pattern": [
     "ror",
     "lpl",
     "lsl"
   ],
-  "key":
-  {
-    "r":
-    {
+  "key": {
+    "r": {
       "item": "minecraft:red_carpet"
     },
-    "o":
-    {
+    "o": {
       "item": "minecraft:orange_carpet"
     },
-    "l":
-    {
+    "l": {
       "tag": "minecraft:logs"
     },
-    "s":
-    {
+    "s": {
       "tag": "minecraft:wooden_slabs"
     },
-    "p":
-    {
+    "p": {
       "item": "wwm:phoenix_feather"
     }
   },
-  "result":
-  {
-    "item": "wwm:wizarding_bench",
-    "count": 1
+  "result": {
+    "item": "wwm:wizarding_bench"
   }
 }

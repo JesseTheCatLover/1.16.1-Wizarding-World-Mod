@@ -12,12 +12,12 @@ import net.minecraftforge.fml.common.Mod;
 public class ModClientEvents {
 
     @SubscribeEvent
-    public static void onPlayerKillingCurse(RegisterCommandsEvent event)
-    {
+    public static void onPlayerKillingCurse(RegisterCommandsEvent event) {
         event.getDispatcher().register(Commands.literal("Avada")
-                .then(Commands.literal("Kedavra").executes(PSource ->{
+                .then(Commands.literal("Kedavra").executes(PSource -> {
                     return ModEntries.KillingCurse(PSource.getSource().asPlayer());
                 })));
     }
+
 
 }

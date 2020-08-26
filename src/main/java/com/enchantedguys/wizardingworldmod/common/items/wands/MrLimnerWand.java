@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MrLimnerWand extends Item {
+public class MrLimnerWand extends Item implements IWandItem {
     public MrLimnerWand() {
         super(new Item.Properties()
                 .group(WizardingWorldMod.WANDS)
@@ -33,8 +33,7 @@ public class MrLimnerWand extends Item {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 
-        if (KeyboardHelper.isHoldingShift())
-        {
+        if (KeyboardHelper.isHoldingShift()) {
 
             tooltip.add(new StringTextComponent(ModEntries.WandInformation("Alder", "phoenix feather",
                     "12 ¼ and slightly springy")));
@@ -61,5 +60,10 @@ public class MrLimnerWand extends Item {
     @Override
     public int getUseDuration(ItemStack stack) {
         return 10000;
+    }
+
+    @Override
+    public Item getWandItem() {
+        return this;
     }
 }

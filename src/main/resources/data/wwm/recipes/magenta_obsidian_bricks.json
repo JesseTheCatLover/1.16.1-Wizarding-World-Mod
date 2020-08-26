@@ -8,9 +8,7 @@
       "item": "minecraft:magenta_dye"
     }
   ],
-  "result":
-  {
-    "item": "wwm:magenta_obsidian_bricks",
-    "count": 1
+  "result": {
+    "item": "wwm:magenta_obsidian_bricks"
   }
 }

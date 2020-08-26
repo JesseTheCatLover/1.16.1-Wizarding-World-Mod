@@ -1,28 +1,19 @@
 package com.enchantedguys.wizardingworldmod.common.items.charmbooks;
 
+import com.enchantedguys.wizardingworldmod.client.screens.charmbook.AbstractCharmBookScreen;
 import com.enchantedguys.wizardingworldmod.common.WizardingWorldMod;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
 
 
-public class KillingCurseCharmBook extends Item {
+public class KillingCurseCharmBook extends AbstractCharmBook  {
 
-    public KillingCurseCharmBook(){
-
-        super(new Item.Properties()
-                .group(WizardingWorldMod.CHARMS)
-                .maxStackSize(1)
-        );
+    @Override
+    public AbstractCharmBookScreen getScreen() {
+        return WizardingWorldMod.getCharmBookScreenManager().getScreen(KillingCurseCharmBook.class);
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        return super.onItemRightClick(worldIn, playerIn, handIn);
-
+    public Item getCharmBookItem() {
+        return this;
     }
-    
 }

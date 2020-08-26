@@ -8,9 +8,7 @@
       "item": "minecraft:light_blue_dye"
     }
   ],
-  "result":
-  {
-    "item": "wwm:light_blue_obsidian_bricks",
-    "count": 1
+  "result": {
+    "item": "wwm:light_blue_obsidian_bricks"
   }
 }

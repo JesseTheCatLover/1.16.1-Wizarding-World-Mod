@@ -8,9 +8,7 @@
       "item": "minecraft:brown_dye"
     }
   ],
-  "result":
-  {
-    "item": "wwm:brown_obsidian_bricks",
-    "count": 1
+  "result": {
+    "item": "wwm:brown_obsidian_bricks"
   }
 }

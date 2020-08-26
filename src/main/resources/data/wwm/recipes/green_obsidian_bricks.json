@@ -8,9 +8,7 @@
       "item": "minecraft:green_dye"
     }
   ],
-  "result":
-  {
-    "item": "wwm:green_obsidian_bricks",
-    "count": 1
+  "result": {
+    "item": "wwm:green_obsidian_bricks"
   }
 }

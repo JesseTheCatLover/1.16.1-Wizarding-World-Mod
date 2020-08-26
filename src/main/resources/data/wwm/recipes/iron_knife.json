@@ -1,24 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern":
-  [
-    "x",
-    "y"
+  "pattern": [
+    " x ",
+    " y "
   ],
-  "key":
-  {
-    "x":
-    {
+  "key": {
+    "x": {
       "item": "minecraft:iron_ingot"
     },
-    "y":
-    {
+    "y": {
       "item": "minecraft:stick"
     }
   },
-  "result":
-  {
-    "item": "wwm:iron_knife",
-    "count": 1
+  "result": {
+    "item": "wwm:iron_knife"
   }
 }
