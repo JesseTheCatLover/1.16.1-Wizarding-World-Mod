@@ -2,16 +2,18 @@ package com.enchantedguys.wizardingworldmod.common.items;
 
 import com.enchantedguys.wizardingworldmod.common.WizardingWorldMod;
 import com.enchantedguys.wizardingworldmod.common.init.ModItems;
-import net.minecraft.entity.LivingEntity;
+import com.google.common.collect.ImmutableList;
+import javafx.util.Pair;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
-import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-public class WaterGlass extends Item {
+import javax.annotation.Nullable;
+
+public class WaterGlass extends ConsumeItem {
     public WaterGlass() {
         super(new Item.Properties()
                 .group(WizardingWorldMod.MATERIALS)
@@ -33,15 +35,14 @@ public class WaterGlass extends Item {
         return 15;
     }
 
+    @Nullable
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        PlayerEntity playerentity = entityLiving instanceof PlayerEntity ? (PlayerEntity)entityLiving : null;
+    public ImmutableList<Pair<ItemStack, Boolean>> itemsToGive() {
+        return ImmutableList.of(new Pair<>(ModItems.BEER_GLASS.get().getDefaultInstance(), true));
+    }
 
-        if (playerentity.getHeldItemMainhand().isEmpty()) {
-            playerentity.setHeldItem(Hand.MAIN_HAND, new ItemStack(ModItems.BEER_GLASS.get()));
-        } else if (!playerentity.inventory.addItemStackToInventory(new ItemStack(ModItems.BEER_GLASS.get()))) {
-            playerentity.dropItem(new ItemStack(ModItems.BEER_GLASS.get()), false);
-        }
-        return super.onItemUseFinish(stack, worldIn, entityLiving);
+    @Override
+    public void playSound(World world, PlayerEntity playerEntity) {
+
     }
 }

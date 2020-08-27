@@ -1,6 +1,8 @@
 package com.enchantedguys.wizardingworldmod.common.items;
 
 import com.enchantedguys.wizardingworldmod.common.WizardingWorldMod;
+import com.google.common.collect.ImmutableList;
+import javafx.util.Pair;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,13 +19,14 @@ import net.minecraft.util.DrinkHelper;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 
 /**
 *  This Item is used to summon the voldemort
  */
-public class BottleOfBlood extends Item {
+public class BottleOfBlood extends ConsumeItem {
     public BottleOfBlood() {
         super(new Item.Properties()
                 .group(WizardingWorldMod.MATERIALS)
@@ -32,52 +35,35 @@ public class BottleOfBlood extends Item {
         );
     }
 
-    /**
-     * Called when the player finishes using this Item (E.g. finishes eating.). Not called when the player stops using
-     * the Item before the action is complete.
-     */
+    @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        PlayerEntity playerentity = entityLiving instanceof PlayerEntity ? (PlayerEntity) entityLiving : null;
-        if (playerentity instanceof ServerPlayerEntity) {
-            CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayerEntity) playerentity, stack);
-        }
+        if(entityLiving instanceof ServerPlayerEntity)
+            CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayerEntity) entityLiving, stack);
 
-        if (!worldIn.isRemote) {
-            Random rand = new Random();
-            double random = rand.nextDouble();
-
-            if (random <= 1.0f) {
+        if(!worldIn.isRemote) {
+            Random random = worldIn.rand;
+            double rand = random.nextDouble();
+            if(rand <= 1.0)
                 entityLiving.addPotionEffect(new EffectInstance(Effects.HUNGER, 60, 7));
-            }
-
-            if (random <= 0.6f) {
+            if(rand <= 0.6)
                 entityLiving.addPotionEffect(new EffectInstance(Effects.POISON, 30, 2));
-            }
-
-            if (random <= 0.4f) {
+            if(rand <= 0.4)
                 entityLiving.addPotionEffect(new EffectInstance(Effects.NAUSEA, 130, 2));
-            }
-
         }
 
-        if (playerentity != null) {
-            playerentity.addStat(Stats.ITEM_USED.get(this));
-            if (!playerentity.abilities.isCreativeMode) {
-                stack.shrink(1);
-            }
-        }
+        return super.onItemUseFinish(stack, worldIn, entityLiving);
+    }
 
-        if (playerentity == null || !playerentity.abilities.isCreativeMode) {
-            if (stack.isEmpty()) {
-                return new ItemStack(Items.GLASS_BOTTLE);
-            }
 
-            if (playerentity != null) {
-                playerentity.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
-            }
-        }
+    @Nullable
+    @Override
+    public ImmutableList<Pair<ItemStack, Boolean>> itemsToGive() {
+        return ImmutableList.of(new Pair<>(Items.GLASS_BOTTLE.getDefaultInstance(), true));
+    }
 
-        return stack;
+    @Override
+    public void playSound(World world, PlayerEntity playerEntity) {
+
     }
 
     /**

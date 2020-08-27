@@ -2,19 +2,23 @@ package com.enchantedguys.wizardingworldmod.common.items.foods;
 
 import com.enchantedguys.wizardingworldmod.common.WizardingWorldMod;
 import com.enchantedguys.wizardingworldmod.common.init.ModItems;
-import net.minecraft.entity.LivingEntity;
+import com.enchantedguys.wizardingworldmod.common.items.ConsumeItem;
+import com.google.common.collect.ImmutableList;
+import javafx.util.Pair;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DrinkHelper;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+import java.util.Random;
 
-public class BertieBottsBeans extends Item {
+
+public class BertieBottsBeans extends ConsumeItem {
     public BertieBottsBeans() {
         super(new Item.Properties()
                 .group(WizardingWorldMod.FOODS)
@@ -34,27 +38,18 @@ public class BertieBottsBeans extends Item {
         return 10;
     }
 
-    // Prepare picking beans
+    @Nullable
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-
-        PlayerEntity playerentity = entityLiving instanceof PlayerEntity ? (PlayerEntity) entityLiving : null;
-
+    public ImmutableList<Pair<ItemStack, Boolean>> itemsToGive() {
         ItemStack itemStack = ModItems.BEANS.get().getDefaultInstance().copy();
-        itemStack = BeansItem.setColor(itemStack, BeansItem.BeansColor.VALUES[worldIn.getRandom().nextInt(BeansItem.BeansColor.VALUES.length)]);
+        itemStack = BeansItem.setColor(itemStack, BeansItem.BeansColor.VALUES[new Random().nextInt(BeansItem.BeansColor.VALUES.length)]);
+        return ImmutableList.of(new Pair<>(itemStack, true));
+    }
 
-        if (playerentity.getHeldItemMainhand().isEmpty()) {
-            playerentity.setHeldItem(Hand.MAIN_HAND, itemStack);
-        } else if (!playerentity.inventory.addItemStackToInventory(itemStack)) {
-            playerentity.dropItem(itemStack, false);
-        }
-
+    @Override
+    public void playSound(World worldIn, PlayerEntity playerentity) {
         worldIn.playSound(null, playerentity.getPosX(), playerentity.getPosY(),
                 playerentity.getPosZ(), SoundEvents.UI_STONECUTTER_TAKE_RESULT, null,
                 0.8F, 2.1F / (random.nextFloat() * 0.5F + 1.0F) + 0.2F);
-        playerentity.addStat(Stats.ITEM_USED.get(this));
-        stack.shrink(1);
-
-        return super.onItemUseFinish(stack, worldIn, entityLiving);
     }
 }
