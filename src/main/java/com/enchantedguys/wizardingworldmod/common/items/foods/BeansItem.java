@@ -33,7 +33,7 @@ public class BeansItem extends BaseFoodItem {
                 .group(WizardingWorldMod.FOODS));
     }
 
-    public static int getPropertyOverrite(ItemStack itemStack, @Nullable World world, @Nullable LivingEntity livingEntity) {
+    public static int getPropertyOverride(ItemStack itemStack, @Nullable World world, @Nullable LivingEntity livingEntity) {
         BeansColor color = getColor(itemStack);
         if (color == null)
             return 0;

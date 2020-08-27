@@ -13,8 +13,6 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, WizardingWorldMod.MOD_ID);
 
 
-    // Sound Events
-
     public static final Lazy<SoundEvent> LAZY_HARRY_POTTER_THEME_MUSIC =
             Lazy.of(() -> new SoundEvent(new ResourceLocation(WizardingWorldMod.MOD_ID,"music_disc.harry_potter_theme")));
 

@@ -19,10 +19,6 @@ public class BertieBottsBeans extends Item {
         );
     }
 
-    // Preparing Numbers Of Beans
-    int BeansInPocket = 12;
-
-    // Preparing Right Click Event
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 
@@ -39,18 +35,17 @@ public class BertieBottsBeans extends Item {
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
 
-       /* // Preparing playerentity Variable
         PlayerEntity playerentity = entityLiving instanceof PlayerEntity ? (PlayerEntity) entityLiving : null;
 
         // Default itemStack Variable
-        ItemStack itemStack = new ItemStack(ModItems.FLAVOR_BEANS_BLACK.get());
+        ItemStack itemStack = new ItemStack(ModItems.BEANS.get());
 
-        for (int x = 6; x > 0; x--) {
+        for (int x = ModMath.getRandomNumberWithinIntRange(7, 9); x > 0; x--) {
 
-            if (!playerentity.abilities.isCreativeMode) {
-                //BeansInPocket -= 1;
-            }
-
+            /**
+             * I don't know what to put here, sorry.
+             */
+/*
             switch (ModMath.getRandomNumberWithinIntRange(1, 16)) {
                 case 1:
                     itemStack = new ItemStack(ModItems.FLAVOR_BEANS_BLACK.get());
@@ -118,6 +113,8 @@ public class BertieBottsBeans extends Item {
 
             }
 
+ */
+
             if (playerentity.getHeldItemMainhand().isEmpty()) {
                 playerentity.setHeldItem(Hand.MAIN_HAND, new ItemStack(itemStack.getItem()));
             } else if (!playerentity.inventory.addItemStackToInventory(new ItemStack(itemStack.getItem()))) {
@@ -127,16 +124,12 @@ public class BertieBottsBeans extends Item {
             worldIn.playSound((PlayerEntity) null, playerentity.getPosX(), playerentity.getPosY(),
                     playerentity.getPosZ(), SoundEvents.UI_STONECUTTER_TAKE_RESULT, null,
                     0.8F, 2.1F / (random.nextFloat() * 0.5F + 1.0F) + 0.2F);
-        } //else  {
-           /* if (playerentity != null && !playerentity.abilities.isCreativeMode) {
-                playerentity.addStat(Stats.ITEM_USED.get(this));
-                stack.shrink(1);
-                BeansInPocket = 12;
-        if (playerentity != null && !playerentity.abilities.isCreativeMode) {
+        }
+        if (playerentity != null) {
             playerentity.addStat(Stats.ITEM_USED.get(this));
             stack.shrink(1);
 
-        }*/
+            }
         return super.onItemUseFinish(stack, worldIn, entityLiving);
     }
 }
