@@ -169,7 +169,7 @@ public class BeansItem extends BaseFoodItem {
         WHITE(13, "white", Color.WHITE),
         YELLOW(14, "yellow", Color.YELLOW);
 
-        private static final BeansColor[] VALUES = values();
+        public static final BeansColor[] VALUES = values();
 
         private static final Map<Integer, BeansColor> BY_ID = Arrays.stream(values()).collect(Collectors.toMap(BeansColor::getId, (id) -> id));
 
