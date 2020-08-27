@@ -53,7 +53,8 @@ public class BeansItem extends BaseFoodItem {
 
     @Override
     public String getTranslationKey(ItemStack stack) {
-        return super.getTranslationKey(stack) + "." + Objects.requireNonNull(getColor(stack)).getName();
+        BeansColor color = getColor(stack);
+        return super.getTranslationKey(stack) + "." + (color == null ? "black" : color.getName());
     }
 
     /*
@@ -97,10 +98,11 @@ public class BeansItem extends BaseFoodItem {
      * @param stack the stack to set the color
      * @param color the color
      */
-    public static void setColor(ItemStack stack, BeansColor color) {
+    public static ItemStack setColor(ItemStack stack, BeansColor color) {
         CompoundNBT tag = stack.getOrCreateTag();
         tag.putInt(NBT_COLOR, color.getId());
         stack.setTag(tag);
+        return stack.copy();
     }
 
     private static Food getFoodByColor(BeansColor color) {
@@ -169,7 +171,7 @@ public class BeansItem extends BaseFoodItem {
         WHITE(13, "white", Color.WHITE),
         YELLOW(14, "yellow", Color.YELLOW);
 
-        private static final BeansColor[] VALUES = values();
+        public static final BeansColor[] VALUES = values();
 
         private static final Map<Integer, BeansColor> BY_ID = Arrays.stream(values()).collect(Collectors.toMap(BeansColor::getId, (id) -> id));
 
@@ -212,19 +214,11 @@ public class BeansItem extends BaseFoodItem {
         @Override
         public int getColor(ItemStack stack, int tintIndex) {
             BeansColor beansColor = BeansItem.getColor(stack);
-
-            {
-                if (tintIndex == 0) {
-                    return beansColor.getColor().getRGB();
-                }
-
-                if (beansColor == null)
-                {
-                    return beansColor.BLACK.getColor().getRGB();
-                }
-
-                return Color.BLACK.getRGB();
+            if (beansColor != null && tintIndex == 0) {
+                return beansColor.getColor().getRGB();
             }
+
+            return Color.BLACK.getRGB();
         }
     }
 

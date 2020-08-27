@@ -2,7 +2,9 @@ package com.enchantedguys.wizardingworldmod.client.screens.charmbook;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
@@ -17,6 +19,7 @@ public abstract class AbstractCharmBookScreen extends Screen {
     protected int texHeight;
     protected int guiLeft;
     protected int guiTop;
+    protected Button doneButton;
 
     public AbstractCharmBookScreen(ITextComponent titleIn, ResourceLocation texture, int texWidth, int texHeight) {
         super(titleIn);
@@ -29,11 +32,13 @@ public abstract class AbstractCharmBookScreen extends Screen {
     protected void init() {
         super.init();
         this.guiLeft = (this.width - texWidth) / 2;
-        this.guiTop = (this.height - texHeight) / 2;
+        this.guiTop = ((this.height - texHeight) / 2) - 15;
+        this.doneButton = this.addButton(new Button(this.guiLeft + (texWidth / 2) - 49, this.guiTop + texHeight + 10, 98, 20, DialogTexts.field_240632_c_, (press) -> closeScreen()));
     }
 
     @Override
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
         renderBackground(matrixStack, 0);
         renderComponentHoverEffect(matrixStack, Style.EMPTY, mouseX, mouseY);
         this.additionalBackgroundRendering(matrixStack);
