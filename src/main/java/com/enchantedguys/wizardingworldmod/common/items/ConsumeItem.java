@@ -44,7 +44,7 @@ public abstract class ConsumeItem extends Item {
     }
 
     /**
-     * Return a list of {@link ItemStack}s
+     * Return a list of {@link Pair}s
      * You can create the list with {@link ImmutableList#of()}.
      * Create new {@link Pair<ItemStack, Boolean>} instances, where the first parameter should the item you want to give to the player
      * and if you set the boolean to true then it would try to give it into the main hand

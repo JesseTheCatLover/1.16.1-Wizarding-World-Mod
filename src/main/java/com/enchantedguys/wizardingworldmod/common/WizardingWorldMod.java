@@ -2,6 +2,7 @@ package com.enchantedguys.wizardingworldmod.common;
 
 import com.enchantedguys.wizardingworldmod.client.screens.charmbook.CharmBookScreenManager;
 import com.enchantedguys.wizardingworldmod.common.init.ModBlocks;
+import com.enchantedguys.wizardingworldmod.common.init.ModEntities;
 import com.enchantedguys.wizardingworldmod.common.init.ModItems;
 import com.enchantedguys.wizardingworldmod.common.init.ModSounds;
 import net.minecraft.item.BlockItem;
@@ -39,6 +40,7 @@ public class WizardingWorldMod {
 
         ModSounds.SOUNDS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
+        ModEntities.ENTITY_TYPES.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
 
         charmBookScreenManager = new CharmBookScreenManager();
