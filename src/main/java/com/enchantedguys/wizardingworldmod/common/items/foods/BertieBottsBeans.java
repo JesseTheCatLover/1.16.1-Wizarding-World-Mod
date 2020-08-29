@@ -95,7 +95,7 @@ public class BertieBottsBeans extends ConsumeItem {
     }
 
     private static int[] removeOne(int[] array, int value) {
-        return IntStream.range(0, array.length).filter(i -> i != value).map(i -> array[i]).toArray();
+        return IntStream.range(0, array.length).filter(i -> i != value).map(i -> array[i]).toArray(); //Using IntStream now
     }
 
     private static int[] getBeans(String string) {
