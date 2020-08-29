@@ -1,8 +1,8 @@
 package com.enchantedguys.wizardingworldmod.common.items;
 
 import com.enchantedguys.wizardingworldmod.common.WizardingWorldMod;
-import com.enchantedguys.wizardingworldmod.common.util.Pair;
 import com.google.common.collect.ImmutableList;
+import javafx.util.Pair;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

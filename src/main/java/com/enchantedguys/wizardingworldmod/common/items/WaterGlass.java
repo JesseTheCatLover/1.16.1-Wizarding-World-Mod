@@ -2,8 +2,8 @@ package com.enchantedguys.wizardingworldmod.common.items;
 
 import com.enchantedguys.wizardingworldmod.common.WizardingWorldMod;
 import com.enchantedguys.wizardingworldmod.common.init.ModItems;
-import com.enchantedguys.wizardingworldmod.common.util.Pair;
 import com.google.common.collect.ImmutableList;
+import javafx.util.Pair;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
