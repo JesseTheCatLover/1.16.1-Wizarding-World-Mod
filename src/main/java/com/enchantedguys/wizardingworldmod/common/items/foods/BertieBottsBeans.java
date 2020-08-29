@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 
 public class BertieBottsBeans extends ConsumeItem {
@@ -65,7 +66,10 @@ public class BertieBottsBeans extends ConsumeItem {
     @Nullable
     @Override
     public ImmutableList<Pair<ItemStack, Boolean>> itemsToGive(ItemStack stack) {
-        return ImmutableList.of(new Pair<>(getRandomBean(stack), true));
+        ItemStack beanStack = getRandomBean(stack);
+        if(stack == ItemStack.EMPTY)
+            return null;
+        return ImmutableList.of(new Pair<>(beanStack, true));
     }
 
     @Override
@@ -75,12 +79,9 @@ public class BertieBottsBeans extends ConsumeItem {
                 0.8F, 2.1F / (random.nextFloat() * 0.5F + 1.0F) + 0.2F);
     }
 
-    @Nullable
     public static ItemStack getRandomBean(ItemStack stack) {
-        CompoundNBT tag = stack.getTag();
-        if(tag == null)
-            return null;
-        int[] beans = getBeans(tag.getString(NBT_BEANS));
+        CompoundNBT tag = stack.getOrCreateTag();
+        int[] beans = getBeans(tag.contains(NBT_BEANS) ? tag.getString(NBT_BEANS) : randomBeans());
         if(beans == null)
             return ItemStack.EMPTY;
         Random random = new Random();
@@ -88,32 +89,19 @@ public class BertieBottsBeans extends ConsumeItem {
         ItemStack beanStack = ModItems.BEANS.get().getDefaultInstance().copy();
         beanStack = BeansItem.setColor(beanStack, BeansItem.BeansColor.getById(beansId));
         int[] newBeansId = removeOne(beans, beansId);
-        tag.remove(NBT_BEANS);
-        tag.putString(NBT_BEANS, Arrays.toString(newBeansId).replace("[", "").replace("]", ""));
+        tag.putString(NBT_BEANS, intArrayToString(newBeansId));
         stack.setTag(tag);
         return beanStack;
     }
 
     private static int[] removeOne(int[] array, int value) {
-        for(int i = 0; i < array.length; i++) {
-            if(array[i] == value) {
-                array[i] = -1;
-                break;
-            }
-        }
-        int[] result = new int[array.length - 1];
-        for(int i = 0; i < array.length; i++) {
-            int current = array[i];
-            if(current == -1)
-                continue;
-            result[i] = array[i];
-        }
-        return result;
+        return IntStream.range(0, array.length).filter(i -> i != value).map(i -> array[i]).toArray();
     }
 
     private static int[] getBeans(String string) {
-        string = string.trim();
-        String[] splitted = string.split(",");
+        if(string.equalsIgnoreCase("none"))
+            return null;
+        String[] splitted = string.split(":");
         if(splitted.length == 0)
             return null;
         int[] beans = new int[splitted.length];
@@ -131,9 +119,18 @@ public class BertieBottsBeans extends ConsumeItem {
             do {
                 beanId = BeansItem.BeansColor.VALUES[random.nextInt(BeansItem.BeansColor.VALUES.length)].getId();
             } while (containsDuplicate(cache, beanId));
+            cache[i] = beanId;
         }
-        String res = Arrays.toString(cache);
-        return res.replace("[", "").replace("]", "");
+        return intArrayToString(cache);
+    }
+
+    private static String intArrayToString(int[] array) {
+        if(array.length == 0)
+            return "none";
+        StringBuilder builder = new StringBuilder();
+        for(int c : array)
+            builder.append(c).append(":");
+        return builder.substring(0, builder.length() - 1);
     }
 
     private static boolean containsDuplicate(int[] cache, int i) {

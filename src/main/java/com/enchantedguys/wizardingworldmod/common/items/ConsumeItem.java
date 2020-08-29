@@ -23,8 +23,8 @@ public abstract class ConsumeItem extends Item {
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         PlayerEntity playerEntity = (PlayerEntity) entityLiving;
         List<Pair<ItemStack, Boolean>> items = this.itemsToGive(stack);
-        boolean flag = false;
         if (items != null) {
+            boolean flag = false;
             for (Pair<ItemStack, Boolean> pair : items) {
                 if (pair.value && !flag && playerEntity.getHeldItemMainhand().isEmpty()) {
                     flag = true;
@@ -34,10 +34,10 @@ public abstract class ConsumeItem extends Item {
                 if (!playerEntity.inventory.addItemStackToInventory(pair.key))
                     playerEntity.dropItem(pair.key, false);
             }
+            playerEntity.addStat(Stats.ITEM_USED.get(this), 1);
+            playSound(worldIn, playerEntity);
         }
 
-        playSound(worldIn, playerEntity);
-        playerEntity.addStat(Stats.ITEM_USED.get(this), 1);
 
         if(shouldShrink(stack))
             stack.shrink(1);
