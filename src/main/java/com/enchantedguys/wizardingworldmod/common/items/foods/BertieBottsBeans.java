@@ -79,8 +79,8 @@ public class BertieBottsBeans extends ConsumeItem {
     public static ItemStack getRandomBean(ItemStack stack) {
         CompoundNBT tag = stack.getTag();
         if(tag == null)
-            return null;
-        int[] beans = getBeans(tag.getString(NBT_BEANS));
+            tag = new CompoundNBT();
+        int[] beans = getBeans(tag.contains(NBT_BEANS) ? tag.getString(NBT_BEANS) : randomBeans());
         if(beans == null)
             return ItemStack.EMPTY;
         Random random = new Random();

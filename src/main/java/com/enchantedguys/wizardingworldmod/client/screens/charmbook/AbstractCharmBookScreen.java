@@ -38,8 +38,8 @@ public abstract class AbstractCharmBookScreen extends Screen {
 
     @Override
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        super.render(matrixStack, mouseX, mouseY, partialTicks);
         renderBackground(matrixStack, 0);
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
         renderComponentHoverEffect(matrixStack, Style.EMPTY, mouseX, mouseY);
         this.additionalBackgroundRendering(matrixStack);
     }
