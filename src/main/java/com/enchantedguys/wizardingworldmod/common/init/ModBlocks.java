@@ -10,12 +10,14 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.function.Supplier;
+
 public class ModBlocks {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, WizardingWorldMod.MOD_ID);
 
     // Blocks
-    public static final RegistryObject<Block> WIZARDING_BENCH = registerDefaultBlock("wizarding_bench", AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(2.5F, 14F));
+    public static final RegistryObject<Block> WIZARDING_BENCH = registerDefaultBlock("wizarding_bench", AbstractBlock.Properties.create(Material.WOOD));
     public static final RegistryObject<Block> OBSIDIAN_BRICKS = registerDefaultBlock("obsidian_bricks", AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1200f).sound(SoundType.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).setRequiresTool().setLightLevel(value -> 8));
     public static final RegistryObject<Block> BLACK_OBSIDIAN_BRICKS = registerColoredObsidianBricks("black");
     public static final RegistryObject<Block> BLUE_OBSIDIAN_BRICKS = registerColoredObsidianBricks("blue");
@@ -32,6 +34,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> RED_OBSIDIAN_BRICKS = registerColoredObsidianBricks("red");
     public static final RegistryObject<Block> WHITE_OBSIDIAN_BRICKS = registerColoredObsidianBricks("white");
     public static final RegistryObject<Block> YELLOW_OBSIDIAN_BRICKS = registerColoredObsidianBricks("yellow");
+
+    private static RegistryObject<Block> registerBlock(String name, Supplier<? extends Block> factory) {
+        return BLOCKS.register(name, factory);
+    }
 
     /**
      * Use this to register a block

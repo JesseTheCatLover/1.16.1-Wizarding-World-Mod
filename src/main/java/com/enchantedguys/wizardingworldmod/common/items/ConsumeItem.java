@@ -1,7 +1,7 @@
 package com.enchantedguys.wizardingworldmod.common.items;
 
+import com.enchantedguys.wizardingworldmod.common.util.Pair;
 import com.google.common.collect.ImmutableList;
-import javafx.util.Pair;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -26,13 +26,13 @@ public abstract class ConsumeItem extends Item {
         boolean flag = false;
         if (items != null) {
             for (Pair<ItemStack, Boolean> pair : items) {
-                if (pair.getValue() && !flag && playerEntity.getHeldItemMainhand().isEmpty()) {
+                if (pair.value && !flag && playerEntity.getHeldItemMainhand().isEmpty()) {
                     flag = true;
-                    playerEntity.setHeldItem(Hand.MAIN_HAND, pair.getKey());
+                    playerEntity.setHeldItem(Hand.MAIN_HAND, pair.key);
                     continue;
                 }
-                if (!playerEntity.inventory.addItemStackToInventory(pair.getKey()))
-                    playerEntity.dropItem(pair.getKey(), false);
+                if (!playerEntity.inventory.addItemStackToInventory(pair.key))
+                    playerEntity.dropItem(pair.key, false);
             }
         }
 
