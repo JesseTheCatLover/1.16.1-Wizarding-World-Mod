@@ -22,7 +22,7 @@ public abstract class ConsumeItem extends Item {
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         PlayerEntity playerEntity = (PlayerEntity) entityLiving;
-        List<Pair<ItemStack, Boolean>> items = this.itemsToGive();
+        List<Pair<ItemStack, Boolean>> items = this.itemsToGive(stack);
         boolean flag = false;
         if (items != null) {
             for (Pair<ItemStack, Boolean> pair : items) {
@@ -38,7 +38,9 @@ public abstract class ConsumeItem extends Item {
 
         playSound(worldIn, playerEntity);
         playerEntity.addStat(Stats.ITEM_USED.get(this), 1);
-        stack.shrink(1);
+
+        if(shouldShrink(stack))
+            stack.shrink(1);
 
         return super.onItemUseFinish(stack, worldIn, entityLiving);
     }
@@ -57,12 +59,23 @@ public abstract class ConsumeItem extends Item {
      * return null if you want no items to give
      */
     @Nullable
-    public abstract ImmutableList<Pair<ItemStack, Boolean>> itemsToGive();
+    public abstract ImmutableList<Pair<ItemStack, Boolean>> itemsToGive(ItemStack stack);
 
     /**
      * Override if you want to play a sound
      */
     public abstract void playSound(World world, PlayerEntity playerEntity);
+
+    /**
+     * This method is been used to check if the stack should be shrink
+     * Default is true
+     *
+     * @param stack the stack to check
+     * @return true if it shoudl be shrink and false if not
+     */
+    public boolean shouldShrink(ItemStack stack) {
+        return true;
+    }
 
 
 }

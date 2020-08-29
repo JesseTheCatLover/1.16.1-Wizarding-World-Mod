@@ -1,4 +1,4 @@
-package com.enchantedguys.wizardingworldmod.common.util;
+package com.enchantedguys.wizardingworldmod.common.util.math;
 
 public class ModMath {
 
@@ -11,6 +11,5 @@ public class ModMath {
     public static int getRandomNumberWithinFloatRange(float min, float max) {
         return (int) ((Math.random() * (max - min)) + min);
     }
-
 
 }

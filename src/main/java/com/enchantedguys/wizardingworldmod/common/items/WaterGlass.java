@@ -37,7 +37,7 @@ public class WaterGlass extends ConsumeItem {
 
     @Nullable
     @Override
-    public ImmutableList<Pair<ItemStack, Boolean>> itemsToGive() {
+    public ImmutableList<Pair<ItemStack, Boolean>> itemsToGive(ItemStack stack) {
         return ImmutableList.of(new Pair<>(ModItems.BEER_GLASS.get().getDefaultInstance(), true));
     }
 

@@ -57,7 +57,7 @@ public class BottleOfBlood extends ConsumeItem {
 
     @Nullable
     @Override
-    public ImmutableList<Pair<ItemStack, Boolean>> itemsToGive() {
+    public ImmutableList<Pair<ItemStack, Boolean>> itemsToGive(ItemStack stack) {
         return ImmutableList.of(new Pair<>(Items.GLASS_BOTTLE.getDefaultInstance(), true));
     }
 
