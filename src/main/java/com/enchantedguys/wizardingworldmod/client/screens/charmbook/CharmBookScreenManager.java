@@ -8,6 +8,10 @@ import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * This class is been used to register the screens for the charm books
+ * You can access to this class from: {@link WizardingWorldMod#getCharmBookScreenManager()}
+ */
 public class CharmBookScreenManager {
 
     private final Map<Class<? extends AbstractCharmBook>, AbstractCharmBookScreen> screens;
@@ -16,6 +20,12 @@ public class CharmBookScreenManager {
         this.screens = Maps.newHashMap();
     }
 
+    /**
+     * Use this method to register a screen for a charm book
+     *
+     * @param clazz the charm book class, where you want to add the screen
+     * @param screen a new instance from the screen class
+     */
     public void registerScreen(Class<? extends AbstractCharmBook> clazz, AbstractCharmBookScreen screen) {
         Objects.requireNonNull(clazz, "Can not register charm book screen, screen type is null");
         Objects.requireNonNull(screen, "Can not register charm book screen, screen object is null");
