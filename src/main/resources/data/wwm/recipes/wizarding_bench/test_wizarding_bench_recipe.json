@@ -1,0 +1,16 @@
+{
+  "type": "wwm:wizarding_bench",
+  "size": 2,
+  "input_0": {
+    "item": "wwm:mr_limner_wand"
+  },
+  "input_1": {
+    "item": "wwm:killing_curse_charm_book"
+  },
+  "output": {
+    "output_item": {
+      "item": "wwm:mr_limner_wand"
+    },
+    "charm_book": "wwm:charm_book_killing_curse"
+  }
+}

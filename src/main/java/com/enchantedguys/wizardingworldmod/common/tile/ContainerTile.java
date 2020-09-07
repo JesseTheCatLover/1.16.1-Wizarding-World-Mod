@@ -104,4 +104,8 @@ public abstract class ContainerTile extends TileEntity implements INamedContaine
         inventoryCapabilityExternal.invalidate();
     }
 
+    protected BooleanSupplier trueSupplier() { return () -> true; }
+
+    protected BooleanSupplier falseSupplier() { return () -> false; }
+
 }

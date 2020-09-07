@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
-public abstract class RecipeTile<R extends IModRecipe<RecipeWrapper>> extends ContainerTile implements ITickableTileEntity {
+public abstract class WorkingTile<R extends IModRecipe<RecipeWrapper>> extends ContainerTile implements ITickableTileEntity {
 
     public static final int DEFAULT_ARROW_WIDTH = 24;
 
@@ -27,7 +27,7 @@ public abstract class RecipeTile<R extends IModRecipe<RecipeWrapper>> extends Co
     public boolean craftingFlag = false;
     public boolean idle = false;
 
-    public RecipeTile(TileEntityType<?> tileEntityTypeIn, int inventorySlots) {
+    public WorkingTile(TileEntityType<?> tileEntityTypeIn, int inventorySlots) {
         super(tileEntityTypeIn, inventorySlots);
     }
 

@@ -1,6 +1,7 @@
 package com.enchantedguys.wizardingworldmod.common.init;
 
 import com.enchantedguys.wizardingworldmod.common.WizardingWorldMod;
+import com.enchantedguys.wizardingworldmod.common.blocks.WizardingBenchBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -17,7 +18,7 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, WizardingWorldMod.MOD_ID);
 
     // Blocks
-    public static final RegistryObject<Block> WIZARDING_BENCH = registerDefaultBlock("wizarding_bench", AbstractBlock.Properties.create(Material.WOOD));
+    public static final RegistryObject<Block> WIZARDING_BENCH = registerBlock("wizarding_bench", WizardingBenchBlock::new);
     public static final RegistryObject<Block> OBSIDIAN_BRICKS = registerDefaultBlock("obsidian_bricks", AbstractBlock.Properties.create(Material.ROCK).hardnessAndResistance(50f, 1200f).sound(SoundType.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).setRequiresTool().setLightLevel(value -> 8));
     public static final RegistryObject<Block> BLACK_OBSIDIAN_BRICKS = registerColoredObsidianBricks("black");
     public static final RegistryObject<Block> BLUE_OBSIDIAN_BRICKS = registerColoredObsidianBricks("blue");

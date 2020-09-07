@@ -1,10 +1,8 @@
 package com.enchantedguys.wizardingworldmod.common;
 
 import com.enchantedguys.wizardingworldmod.client.screens.charmbook.CharmBookScreenManager;
-import com.enchantedguys.wizardingworldmod.common.init.ModBlocks;
-import com.enchantedguys.wizardingworldmod.common.init.ModEntities;
-import com.enchantedguys.wizardingworldmod.common.init.ModItems;
-import com.enchantedguys.wizardingworldmod.common.init.ModSounds;
+import com.enchantedguys.wizardingworldmod.common.handling.CharmBookTypeRegister;
+import com.enchantedguys.wizardingworldmod.common.init.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -32,6 +30,7 @@ public class WizardingWorldMod {
     public static final String MOD_ID = "wwm";
 
     private static CharmBookScreenManager charmBookScreenManager;
+    private static CharmBookTypeRegister charmBookTypeRegister;
 
     public WizardingWorldMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -39,11 +38,15 @@ public class WizardingWorldMod {
         modEventBus.addListener(this::doClientStuff);
 
         ModSounds.SOUNDS.register(modEventBus);
+        ModContainers.CONTAINERS.register(modEventBus);
+        ModTileEntities.TILE_ENTITIES.register(modEventBus);
+        ModRecipes.RECIPE_SERIALIZER.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
         ModEntities.ENTITY_TYPES.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
 
         charmBookScreenManager = new CharmBookScreenManager();
+        charmBookTypeRegister = new CharmBookTypeRegister();
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -71,8 +74,16 @@ public class WizardingWorldMod {
         return charmBookScreenManager;
     }
 
+    public static CharmBookTypeRegister getCharmBookTypeRegister() {
+        return charmBookTypeRegister;
+    }
+
     public static ResourceLocation rl(String path) {
         return new ResourceLocation(MOD_ID, path);
+    }
+
+    public static String withoutWWM(String path) {
+        return path.replace("wwm:", "");
     }
 
     public static ResourceLocation rlTexture(String path) {

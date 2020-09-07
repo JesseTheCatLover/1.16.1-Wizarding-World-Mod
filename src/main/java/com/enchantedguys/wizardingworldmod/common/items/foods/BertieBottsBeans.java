@@ -4,6 +4,7 @@ import com.enchantedguys.wizardingworldmod.common.WizardingWorldMod;
 import com.enchantedguys.wizardingworldmod.common.init.ModItems;
 import com.enchantedguys.wizardingworldmod.common.items.ConsumeItem;
 import com.enchantedguys.wizardingworldmod.common.util.Pair;
+import com.enchantedguys.wizardingworldmod.common.util.math.ModMath;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -24,6 +25,7 @@ import java.util.stream.IntStream;
 public class BertieBottsBeans extends ConsumeItem {
 
     public static final String NBT_BEANS = "BeanIDs";
+    public static final String NBT_COUNT = "BeanCount";
 
     public BertieBottsBeans() {
         super(new Item.Properties()
@@ -47,7 +49,7 @@ public class BertieBottsBeans extends ConsumeItem {
     @Override
     public boolean shouldShrink(ItemStack stack) {
         CompoundNBT tag = stack.getTag();
-        if(tag == null)
+        if (tag == null)
             return true;
         int[] beans = getBeans(tag.getString(NBT_BEANS));
         return beans == null;
@@ -58,6 +60,7 @@ public class BertieBottsBeans extends ConsumeItem {
         ItemStack itemStack = new ItemStack(this);
         CompoundNBT tag = itemStack.getOrCreateTag();
         tag.putString(NBT_BEANS, randomBeans());
+        tag.putInt(NBT_COUNT, ModMath.getRandomNumberWithinIntRange(7, 9));
         itemStack.setTag(tag);
         return itemStack;
     }
@@ -67,7 +70,7 @@ public class BertieBottsBeans extends ConsumeItem {
     @Override
     public ImmutableList<Pair<ItemStack, Boolean>> itemsToGive(ItemStack stack) {
         ItemStack beanStack = getRandomBean(stack);
-        if(stack == ItemStack.EMPTY)
+        if (stack.isEmpty())
             return null;
         return ImmutableList.of(new Pair<>(beanStack, true));
     }
@@ -81,8 +84,15 @@ public class BertieBottsBeans extends ConsumeItem {
 
     public static ItemStack getRandomBean(ItemStack stack) {
         CompoundNBT tag = stack.getOrCreateTag();
+        int count = getBeanCount(stack);
+        if (count == -1) {
+            count = ModMath.getRandomNumberWithinIntRange(7, 9);
+            setBeanCount(stack, count);
+        }
+        if(count == 0)
+            return ItemStack.EMPTY;
         int[] beans = getBeans(tag.contains(NBT_BEANS) ? tag.getString(NBT_BEANS) : randomBeans());
-        if(beans == null)
+        if (beans == null)
             return ItemStack.EMPTY;
         Random random = new Random();
         int beansId = beans[random.nextInt(beans.length)];
@@ -91,6 +101,7 @@ public class BertieBottsBeans extends ConsumeItem {
         int[] newBeansId = removeOne(beans, beansId);
         tag.putString(NBT_BEANS, intArrayToString(newBeansId));
         stack.setTag(tag);
+        setBeanCount(stack, --count);
         return beanStack;
     }
 
@@ -99,13 +110,13 @@ public class BertieBottsBeans extends ConsumeItem {
     }
 
     private static int[] getBeans(String string) {
-        if(string.equalsIgnoreCase("none"))
+        if (string.equalsIgnoreCase("none"))
             return null;
         String[] splitted = string.split(":");
-        if(splitted.length == 0)
+        if (splitted.length == 0)
             return null;
         int[] beans = new int[splitted.length];
-        for(int i = 0; i < beans.length; i++)
+        for (int i = 0; i < beans.length; i++)
             beans[i] = Integer.parseInt(splitted[i]);
         return beans;
     }
@@ -125,12 +136,26 @@ public class BertieBottsBeans extends ConsumeItem {
     }
 
     private static String intArrayToString(int[] array) {
-        if(array.length == 0)
+        if (array.length == 0)
             return "none";
         StringBuilder builder = new StringBuilder();
-        for(int c : array)
+        for (int c : array)
             builder.append(c).append(":");
         return builder.substring(0, builder.length() - 1);
+    }
+
+    private static int getBeanCount(ItemStack stack) {
+        if (stack.getTag() == null || !stack.getTag().contains(NBT_COUNT))
+            return -1;
+        return stack.getTag().getInt(NBT_COUNT);
+    }
+
+    private static void setBeanCount(ItemStack stack, int newCount) {
+        CompoundNBT nbt = stack.getTag();
+        if (nbt == null)
+            nbt = new CompoundNBT();
+        nbt.putInt(NBT_COUNT, newCount);
+        stack.setTag(nbt);
     }
 
     private static boolean containsDuplicate(int[] cache, int i) {

@@ -1,5 +1,7 @@
 package com.enchantedguys.wizardingworldmod.common.items.wands;
 
+import com.enchantedguys.wizardingworldmod.common.WizardingWorldMod;
+import com.enchantedguys.wizardingworldmod.common.items.charmbooks.ICharmBook;
 import com.enchantedguys.wizardingworldmod.common.util.helpers.KeyboardHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.block.BlockState;
@@ -10,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -27,6 +30,8 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public abstract class AbstractWandItem extends Item implements IWandItem {
+
+    public static final String NBT_CHARM_BOOK = "CharmBookID";
 
     public static final int ON_RIGHT_CLICK = 1;
     public static final int ON_USE = 2;
@@ -46,14 +51,15 @@ public abstract class AbstractWandItem extends Item implements IWandItem {
         tooltip.addAll(desc);
     }
 
+
     /**
      * This method will be called when the item is been used, right clicked or finished with using.
      *
-     * @param itemStack the item as ItemStack
-     * @param player the player who using the item
-     * @param world the world
+     * @param itemStack      the item as ItemStack
+     * @param player         the player who using the item
+     * @param world          the world
      * @param hittetEntities the entities in a 5 block radius which been hittet
-     * @param hittetBlock the block who the player look at
+     * @param hittetBlock    the block who the player look at
      */
     public abstract void performAttack(ItemStack itemStack, PlayerEntity player, World world, List<LivingEntity> hittetEntities, BlockState hittetBlock);
 
@@ -71,8 +77,7 @@ public abstract class AbstractWandItem extends Item implements IWandItem {
         if (this.actionType() == ON_RIGHT_CLICK) {
             Vector3d eye = playerIn.getEyePosition(1.0F);
             Vector3d look = playerIn.getLookVec();
-            RayTraceContext context = new RayTraceContext(eye, look.add(eye), RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, playerIn);
-            BlockRayTraceResult rayTraceResult = worldIn.rayTraceBlocks(context);
+            BlockRayTraceResult rayTraceResult = getRayTrace(eye, look, playerIn, worldIn);
             this.performAttack(playerIn.getHeldItem(handIn), playerIn, worldIn, this.getEntities(eye, look, rayTraceResult.subHit, worldIn, playerIn), worldIn.getBlockState(rayTraceResult.getPos()));
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
@@ -83,8 +88,7 @@ public abstract class AbstractWandItem extends Item implements IWandItem {
         if (this.actionType() == ON_USE) {
             Vector3d eye = context.getPlayer().getEyePosition(1.0F);
             Vector3d look = context.getPlayer().getLookVec();
-            RayTraceContext rayContext = new RayTraceContext(eye, look.add(eye), RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, context.getPlayer());
-            BlockRayTraceResult rayTraceResult = context.getWorld().rayTraceBlocks(rayContext);
+            BlockRayTraceResult rayTraceResult = getRayTrace(eye, look, context.getPlayer(), context.getWorld());
             this.performAttack(context.getItem(), context.getPlayer(), context.getWorld(), this.getEntities(eye, look, rayTraceResult.subHit, context.getWorld(), context.getPlayer()), context.getWorld().getBlockState(rayTraceResult.getPos()));
         }
         return super.onItemUse(context);
@@ -96,13 +100,16 @@ public abstract class AbstractWandItem extends Item implements IWandItem {
             PlayerEntity playerIn = (PlayerEntity) entityLiving;
             Vector3d eye = playerIn.getEyePosition(1.0F);
             Vector3d look = playerIn.getLookVec();
-            RayTraceContext context = new RayTraceContext(eye, look.add(eye), RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, playerIn);
-            BlockRayTraceResult rayTraceResult = worldIn.rayTraceBlocks(context);
+            BlockRayTraceResult rayTraceResult = getRayTrace(eye, look, playerIn, worldIn);
             this.performAttack(stack, playerIn, worldIn, this.getEntities(eye, look, rayTraceResult.subHit, worldIn, playerIn), worldIn.getBlockState(rayTraceResult.getPos()));
 
 
         }
         return super.onItemUseFinish(stack, worldIn, entityLiving);
+    }
+
+    protected BlockRayTraceResult getRayTrace(Vector3d eye, Vector3d look, PlayerEntity playerEntity, World world) {
+        return world.rayTraceBlocks(new RayTraceContext(eye, look.add(eye), RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, playerEntity));
     }
 
     protected List<LivingEntity> getEntities(Vector3d pos, Vector3d direction, double range, World world, PlayerEntity player) {
@@ -118,6 +125,30 @@ public abstract class AbstractWandItem extends Item implements IWandItem {
         entities.addAll(world.getEntitiesInAABBexcluding(null, aabb2, filter).stream().map(e -> (LivingEntity) e).collect(Collectors.toList()));
 
         return entities;
+    }
+
+    public static void setCharmBook(ItemStack stack, ICharmBook book) {
+        CompoundNBT tag = stack.getTag();
+        if(tag == null)
+            tag = new CompoundNBT();
+        tag.putString(NBT_CHARM_BOOK, book.getTypeId().getPath());
+        stack.setTag(tag);
+    }
+
+    public static boolean hasCharmBook(ItemStack stack) {
+        CompoundNBT tag = stack.getTag();
+        if(tag == null)
+            return false;
+        return tag.contains(NBT_CHARM_BOOK);
+    }
+
+    @Nullable
+    public static ICharmBook getCharmBook(ItemStack stack) {
+        CompoundNBT tag = stack.getTag();
+        if(!hasCharmBook(stack) || tag == null)
+            return null;
+        String id = tag.getString(NBT_CHARM_BOOK);
+        return WizardingWorldMod.getCharmBookTypeRegister().getCharmBook(WizardingWorldMod.rl(id));
     }
 
 }

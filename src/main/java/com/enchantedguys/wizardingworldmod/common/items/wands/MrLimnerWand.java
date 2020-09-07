@@ -1,6 +1,7 @@
 package com.enchantedguys.wizardingworldmod.common.items.wands;
 
 import com.enchantedguys.wizardingworldmod.common.WizardingWorldMod;
+import com.enchantedguys.wizardingworldmod.common.items.charmbooks.ICharmBook;
 import com.google.common.collect.Lists;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -29,12 +30,13 @@ public class MrLimnerWand extends AbstractWandItem {
 
     @Override
     public void performAttack(ItemStack itemStack, PlayerEntity player, World world, List<LivingEntity> hittetEntities, BlockState hittetBlock) {
-
+        ICharmBook book = AbstractWandItem.getCharmBook(itemStack);
+        System.out.println("DEBUG: " + (book == null ? "none" : book.getTypeId()));
     }
 
     @Override
     public int actionType() {
-        return 0;
+        return 1;
     }
 
 
